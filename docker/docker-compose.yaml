@@ -7,6 +7,8 @@ services:
     ports:
       - "9090:9090"
     entrypoint: sh -c "wget --no-check-certificate -O /etc/prometheus/prometheus-local.yml https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/prometheus/prometheus.yml && exec /bin/prometheus --config.file=/etc/prometheus/prometheus-local.yml --web.enable-remote-write-receiver"
+    networks:
+      - bridge
 
   loki:
     image: grafana/loki:latest
@@ -17,6 +19,8 @@ services:
       - ./shared/loki/rules:/loki/rules/
     ports:
       - "3100:3100"
+    networks:
+      - bridge
 
   promtail:
     image: grafana/promtail:latest
@@ -25,6 +29,8 @@ services:
       - ./shared/logs:/var/log   
     depends_on:
       - loki   
+    networks:
+      - bridge
 
   alloy:
     image: grafana/alloy:latest  
@@ -36,6 +42,8 @@ services:
       - "4317:4317"  
       - "4318:4318"  
     entrypoint: sh -c "apt-get update -y && apt-get -y install wget && wget --no-check-certificate -O /etc/alloy/config.alloy https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/alloy/config.alloy && exec /bin/alloy run /etc/alloy/config.alloy"
+    networks:
+      - bridge
 
   grafana:
     image: grafana/grafana:latest
@@ -48,6 +56,8 @@ services:
     ports:
       - "3000:3000"
     entrypoint: sh -c "wget --no-check-certificate -O /etc/grafana/provisioning/datasources/datasources.yml https://raw.githubusercontent.com/aussiearef/grafana-udemy/main/grafana/datasources.yml && exec sh /run.sh"
+    networks:
+      - bridge
 
 
 volumes:
