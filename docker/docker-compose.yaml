@@ -49,12 +49,6 @@ services:
       - "3000:3000"
     entrypoint: sh -c "wget --no-check-certificate -O /etc/grafana/provisioning/datasources/datasources.yml https://raw.githubusercontent.com/aussiearef/grafana-udemy/main/grafana/datasources.yml && exec sh /run.sh"
 
-  #still uses the shoehub image from aussiaeref's repo. 
-  shoehub:
-    image: aussiearef/shoehub
-    ports:
-      - "8001:8080"
-
 
 volumes:
   prometheus-data:
