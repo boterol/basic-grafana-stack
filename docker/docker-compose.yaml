@@ -62,3 +62,7 @@ services:
 
 volumes:
   prometheus-data:
+
+networks:
+  bridge:
+    external: true
