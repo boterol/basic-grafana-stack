@@ -62,12 +62,13 @@ services:
   node-exporter:
     image: prom/node-exporter:latest
     ports:
-      - "9100:9100"
-    networks: final-network  # To access host-level metrics
+      - "9100:9100" # To access host-level metrics
     command:
       - '--path.rootfs=/host'
     volumes:
       - /:/host:ro,rslave
+    networks:
+      - final-network
 
 volumes:
   prometheus-data:
