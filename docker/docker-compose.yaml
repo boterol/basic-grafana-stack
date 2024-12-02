@@ -59,6 +59,15 @@ services:
     networks:
       - final-network
 
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    network_mode: "host"  # To access host-level metrics
+    command:
+      - '--path.rootfs=/host'
+    volumes:
+      - /:/host:ro,rslave
 
 volumes:
   prometheus-data:
