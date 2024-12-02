@@ -6,6 +6,13 @@ scrape_configs:
     static_configs:
       - targets:
           - outcurr.web.1:9092
+  
+  - job_name: 'spring-actuator'
+    metrics_path: 'outcurrapi/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs: 
+    - targets: 
+      - outcurr.web.1:9092
 
 rule_files:
   - "rule/alerts.yml"
@@ -20,5 +27,6 @@ alerting:
   - static_configs:
     - targets:
        - localhost:9093
+
 
 
