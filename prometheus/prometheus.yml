@@ -13,6 +13,9 @@ scrape_configs:
     static_configs: 
     - targets: 
       - outcurr.web.1:9092
+    basic_auth:
+      username: OutCurrTestUser # Your HTTP basic auth username
+      password: 123456 # Your HTTP basic auth password
 
 rule_files:
   - "rule/alerts.yml"
