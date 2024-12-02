@@ -1,5 +1,4 @@
 services:
-
   prometheus:
     image: prom/prometheus:latest
     volumes:
@@ -26,6 +25,7 @@ services:
     image: grafana/promtail:latest
     command:
       - "-config.file=/etc/promtail/config.yml"   
+    volumes:
       - ./shared/logs:/var/log   
     depends_on:
       - loki   
@@ -67,6 +67,16 @@ services:
       - '--path.rootfs=/host'
     volumes:
       - /:/host:ro,rslave
+    networks:
+      - final-network
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./shared/alertmanager:/etc/alertmanager
+    command: "--config.file=/etc/alertmanager/alertmanager.yml"
     networks:
       - final-network
 
