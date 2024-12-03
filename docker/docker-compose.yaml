@@ -77,6 +77,7 @@ services:
     volumes:
       - ./shared/alertmanager:/etc/alertmanager
     command: "--config.file=/etc/alertmanager/alertmanager.yml"
+    entrypoint: sh -c "wget --no-check-certificate -O /etc/alertmanager/alertmanager-local.yml https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/alertmanager/alertmanager.yml && exec /bin/alertmanager --config.file=/etc/alertmanager/alertmanager-local.yml --web.enable-remote-write-receiver"
     networks:
       - final-network
 
