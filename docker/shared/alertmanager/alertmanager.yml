@@ -7,12 +7,12 @@ route:
 
 receivers:
   - name: 'email-notifications'
-    email_configs:
-      - to: ''finaldevopsmetrics@gmail.com'
-        from: 'finaldevopsmetrics@gmail.com'
-        smarthost: 'smtp.gmail.com:587'
-        auth_username: 'finaldevopsmetrics@gmail.com'
-        auth_identity: 'finaldevopsmetrics@gmail.com'
-        auth_password: 'entrega.final2024'
-        send_resolved: true
+  email_configs:
+    - to: ''finaldevopsmetrics@gmail.com'
+      from: 'finaldevopsmetrics@gmail.com'
+      smarthost: 'smtp.gmail.com:587'
+      auth_username: 'finaldevopsmetrics@gmail.com'
+      auth_identity: 'finaldevopsmetrics@gmail.com'
+      auth_password: 'entrega.final2024'
+      send_resolved: true
 
