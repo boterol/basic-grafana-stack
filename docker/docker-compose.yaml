@@ -5,7 +5,7 @@ services:
       - ./shared/prometheus:/etc/prometheus
     ports:
       - "9090:9090"
-    entrypoint: sh -c "wget --no-check-certificate -O /etc/prometheus/prometheus-local.yml https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/prometheus/prometheus.yml && exec /bin/prometheus --config.file=/etc/prometheus/prometheus-local.yml --web.enable-remote-write-receiver"
+    entrypoint: sh -c "wget --no-check-certificate -O /etc/prometheus/prometheus-local.yml https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/prometheus/prometheus.yml && wget --no-check-certificate -O /etc/prometheus/alerts.yml https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/prometheus/alerts.yml && exec /bin/prometheus --config.file=/etc/prometheus/prometheus-local.yml --web.enable-remote-write-receiver"
     networks:
       - final-network
 
