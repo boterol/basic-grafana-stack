@@ -27,8 +27,6 @@ services:
       - "-config.file=/etc/promtail/config.yml"   
     volumes:
       - ./shared/logs:/var/log   
-    depends_on:
-      - loki   
     networks:
       - final-network
 
@@ -69,6 +67,7 @@ services:
       - /:/host:ro,rslave
     networks:
       - final-network
+
   alertmanager:
     image: prom/alertmanager
     ports:

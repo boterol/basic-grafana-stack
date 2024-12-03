@@ -13,6 +13,6 @@ receivers:
         smarthost: 'smtp.gmail.com:587'
         auth_username: 'finaldevopsmetrics@gmail.com'
         auth_identity: 'finaldevopsmetrics@gmail.com'
-        auth_password: 'entrega.final2024'
+        auth_password: 'tkia mdez sfbu otxt'
         send_resolved: true
 
