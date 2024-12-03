@@ -74,7 +74,8 @@ services:
     ports:
       - "9093:9093"
     volumes:
-      - ./alertmanager/config.yml:/etc/alertmanager/alertmanager.yml
+      - ./shared/alertmanager/config.yml:/etc/alertmanager/alertmanager.yml
+    entrypoint: sh -c "wget --no-check-certificate -O /etc/alertmanager/alertmanager.yml https://raw.githubusercontent.com/boterol/basic-grafana-stack/main/alertmanager/config.yml && exec /bin/alertmanager --config.file=/etc/alertmanager/alertmanager.yml"
     networks:
       - final-network
 
