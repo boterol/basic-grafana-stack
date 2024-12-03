@@ -15,4 +15,4 @@ scrape_configs:
           - ['outcurr.web.1:9092']
         labels:
           job: varlogs
-          __path__: /var/log/*.log
+          __path__: /var/log/outcurr.log
