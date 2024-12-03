@@ -25,8 +25,9 @@ services:
     image: grafana/promtail:latest
     command:
       - "-config.file=/etc/promtail/config.yml"   
-    volumes:
       - ./shared/logs:/var/log   
+    depends_on:
+      - loki      
     networks:
       - final-network
 

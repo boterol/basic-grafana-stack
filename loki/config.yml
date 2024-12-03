@@ -1,43 +1,18 @@
-auth_enabled: false
-
 server:
-  http_listen_port: 3100           # Port for the Loki HTTP API that receives logs
-  grpc_listen_port: 9095           # gRPC API port (optional, not necessary for LokiAppender)
-  log_level: info                  # Log level for Loki server logs (info, debug, etc.)
+  http_listen_port: 9080
+  grpc_listen_port: 0
 
-ingester:
-  wal:
-    dir: /tmp/wal                  # Directory for Write-Ahead Logs (WAL) storage
-  max_chunk_size: 1048576          # Maximum size of a chunk in bytes (1MB)
-  chunk_target_size: 1048576       # Target size of a chunk in bytes (1MB)
+positions:
+  filename: /tmp/positions.yaml
 
-distributor:
-  ring:
-    kvstore:
-      store: inmemory              # Use an in-memory key-value store for the distributor ring
-    replication_factor: 1          # Replication factor for logs
+clients:
+  - url: http://loki:3100/loki/api/v1/push
 
-querier:
-  query_timeout: 1m                # Query timeout for log queries
-  max_concurrent: 20               # Max number of concurrent queries
-
-storage_config:
-  boltdb_shipper:
-    active_index_directory: /data/loki/index                # Directory for storing index data
-    cache_location: /tmp/loki/cache                          # Directory for storing cache data
-    resync_interval: 1h                                       # Interval to resync the index
-  filesystem:
-    directory: /data/loki/chunks                             # Directory to store chunks
-
-compactor:
-  working_directory: /tmp/loki/compactor                   # Directory for compacted data
-
-limits_config:
-  max_streams_per_user: 100000                             # Maximum number of streams per user
-  max_global_streams_per_day: 500000                       # Maximum global streams per day
-  max_chunk_age: 1h                                        # Maximum age of a chunk before it's flushed
-
-chunk_target_size: 1048576                                  # Target size for chunks (1MB)
-table_manager:
-  retention_deletes_enabled: true                           # Enable deletion of old logs based on retention
-  retention_period: 1d
+scrape_configs:
+  - job_name: outcurr-logs
+    static_configs:
+      - targets:
+          - ['outcurr.web.1:9092']
+        labels:
+          job: varlogs
+          __path__: /var/log/*.log
